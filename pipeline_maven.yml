@@ -22,7 +22,7 @@ spec:
   strategy:
     type: JenkinsPipeline
     jenkinsPipelineStrategy:
-      jenkinsfile: "node{\n// Mark the code checkout 'stage'....\nstage 'Checkout'\n\n// Get some code from a GitHub repository\ngit url: 'https://github.com/petenorth/spring-boot-cxf-jaxrs.git'\n\n// Mark the code build\nstage 'Build'\n\nwithMaven(\nmaven: 'M3') { \n//mavenSettingsConfig: 'maven-settings-for-gameoflife', \n//mavenLocalRepo: '.repository') {\n\n// Run the maven build\nsh "mvn clean install"\n}\n}"
+      jenkinsfile: "node('maven'){\nstage 'Checkout'\ngit url: 'https://github.com/petenorth/spring-boot-cxf-jaxrs.git'\nwithMaven(\nmaven: 'M3') {\nsh "mvn clean install"\n}\n}"
   output:
   resources:
   postCommit:
